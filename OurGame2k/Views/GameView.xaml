@@ -1,0 +1,58 @@
+﻿<Window x:Class="OurGame2k.Views.GameView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OurGame2k.Views"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:i1="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
+        mc:Ignorable="d"
+        Title="Game" Height="600" Width="350"
+        MinHeight="600" MinWidth="350"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Viewbox
+            Grid.Row="1"
+            Grid.Column="1"
+        >
+            <Canvas 
+                x:Name="GameCanvas"
+                Grid.Row="1"
+                Grid.Column="1"
+                Background="White"
+                Width="250"
+                ClipToBounds="True"
+                Height="500"
+            >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Loaded">
+                        <i:InvokeCommandAction 
+                            Command="{Binding LoadCanvasCommand}" 
+                            CommandParameter="{Binding ElementName=GameCanvas}"
+                        />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Canvas>
+        </Viewbox>
+        <TextBlock
+            x:Name="ScoreText"
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="Score: "
+            Margin="0, 10"
+            TextAlignment="Center"
+        />
+        <Grid.InputBindings>
+            <KeyBinding 
+            />
+        </Grid.InputBindings>
+    </Grid>
+</Window>
