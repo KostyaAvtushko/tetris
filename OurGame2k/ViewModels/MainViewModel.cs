@@ -39,23 +39,23 @@ namespace OurGame2k.ViewModels
             var values = (object[]) obj;
             if (values[5].Equals(Visibility.Visible))
             {
-                if (
-                    values[0] is string logInName &&
-                    values[1] is string logInPassword
-                    )
-                {
-                    User user = User.GetFromDB(logInName, logInPassword);
-                    if (user != null)
-                    {
+                // if (
+                //     values[0] is string logInName &&
+                //     values[1] is string logInPassword
+                //     )
+                // {
+                    //User user = User.GetFromDB(logInName, logInPassword);
+                    //if (user != null)
+                    //{
                         Views.GameView game = new Views.GameView();
                         game.Show();
-                    } 
-                    else
-                    {
+                    //} 
+                    //else
+                    //{
 
-                    }
+                    //}
                     
-                }
+                //}
             } else if (values[5].Equals(Visibility.Hidden))
             {
                 if (

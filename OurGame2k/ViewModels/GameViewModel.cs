@@ -32,10 +32,22 @@ namespace OurGame2k.ViewModels
             return true;
         }
         private Image[,] imageCtrls;
-        private async void LoadCanvas(object obj)
+        private TetrisBlock[,] tetrisBlocks;
+        private void LoadCanvas(object obj)
         {
-            await GameLoop(obj);
+            imageCtrls = SetupGameCanvas(gameState.GameGrid, (Canvas)obj);
+            Draw(gameState);
         }
+        private readonly TetrisBlock[] tetrisBlocks =
+        {
+            new TetrisBlock(30, Brushes.Orange),
+            new TetrisBlock(30, Brushes.Cyan),
+            new TetrisBlock(30, Brushes.Green),
+            new TetrisBlock(30, Brushes.Yellow),
+            new TetrisBlock(30, Brushes.Red),
+            new TetrisBlock(30, Brushes.Blue),
+            new TetrisBlock(30, Brushes.Purple)
+        };
 
         private readonly ImageSource[] _tileImages = new ImageSource[]
         {
@@ -71,11 +83,11 @@ namespace OurGame2k.ViewModels
             { 
                 for (int c = 0; c < grid.Columns; c++)
                 {
-                    Image imageControl = new Image
-                    {
-                        Width = cellSize,
-                        Height = cellSize,
-                    };
+                    //Image imageControl = new Image
+                    //{
+                    //    Width = cellSize,
+                    //    Height = cellSize,
+                    //};
                     //Rectangle rec = new Rectangle()
                     //{
                     //   Width = cellSize,
@@ -84,14 +96,15 @@ namespace OurGame2k.ViewModels
                     //    Stroke = Brushes.Red,
                     //    StrokeThickness = 2,
                     //};
-                    Canvas.SetTop(imageControl, (r - 2) * cellSize);
-                    Canvas.SetLeft(imageControl, c * cellSize);
-                    gameCanvas.Children.Add(imageControl);
-                    imageControls[r, c] = imageControl; 
+                    TetrisBlock tetrisBlock = new TetrisBlock(30, Brushes.Black);
+                    Canvas.SetTop(tetrisBlock, (r - 2) * cellSize);
+                    Canvas.SetLeft(tetrisBlock, c * cellSize);
+                    gameCanvas.Children.Add(tetrisBlock);
+                    tetrisBlocks[r, c] = imageControl; 
                 }
             }
 
-            return imageControls;
+            return tetrisBlocks;
         }
 
         private void DrawGrid(Game grid)
@@ -101,7 +114,8 @@ namespace OurGame2k.ViewModels
                 for (int c = 0; c < grid.Columns; c++)
                 {
                     int id = grid[r, c];
-                    imageCtrls[r, c].Source = _tileImages[id];
+                    
+                    //imageCtrls[r, c].Source = _tileImages[id];
                 }
             }
         }
@@ -110,7 +124,7 @@ namespace OurGame2k.ViewModels
         {
             foreach (Position p in block.TilePositions())
             {
-                imageCtrls[p.Row, p.Column].Source = _tileImages[block.Id];
+                //imageCtrls[p.Row, p.Column].Source = _tileImages[block.Id];
             }
         }
 
@@ -122,18 +136,18 @@ namespace OurGame2k.ViewModels
             DrawBlock(gameState.CurrentBlock);
         }
 
-        private async Task GameLoop(object obj)
-        {
-            imageCtrls = SetupGameCanvas(gameState.GameGrid, (Canvas)obj);
-            await Task.Delay(10000);
-            Draw(gameState);
+        // private async Task GameLoop(object obj)
+        // {
+        //     // imageCtrls = SetupGameCanvas(gameState.GameGrid, (Canvas)obj);
+        //     // await Task.Delay(10000);
+        //     // Draw(gameState);
 
-            while (!gameState.GameOver)
-            {
-                await Task.Delay(500);
-                gameState.MoveBlockDown();
-                Draw(gameState);
-            }
-        }
+        //     while (!gameState.GameOver)
+        //     {
+        //         await Task.Delay(500);
+        //         gameState.MoveBlockDown();
+        //         Draw(gameState);
+        //     }
+        // }
     }
 }

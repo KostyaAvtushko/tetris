@@ -19,6 +19,7 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Image Source="Assets/TileEmpty" />
         <Viewbox
             Grid.Row="1"
             Grid.Column="1"
